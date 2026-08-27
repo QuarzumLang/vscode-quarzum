@@ -1,0 +1,213 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Quarzum",
+	"comment": "TextMate grammar for the Quarzum programming language. Based on docs/language-reference.md.",
+	"scopeName": "source.quarzum",
+	"fileTypes": [
+		"qz"
+	],
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#declarations"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#identifiers"
+		}
+	],
+	"repository": {
+		"declarations": {
+			"patterns": [
+				{
+					"name": "keyword.declaration.quarzum",
+					"match": "\\b(function)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+					"captures": {
+						"2": {
+							"name": "entity.name.function.quarzum"
+						}
+					}
+				},
+				{
+					"name": "storage.type.class.quarzum",
+					"match": "\\b(class|struct|enum|trait)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+					"captures": {
+						"2": {
+							"name": "entity.name.type.quarzum"
+						}
+					}
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.quarzum",
+					"match": "//.*$"
+				},
+				{
+					"name": "comment.block.quarzum",
+					"begin": "/\\*",
+					"end": "\\*/"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.quarzum",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"include": "#escapes"
+						}
+					]
+				},
+				{
+					"name": "string.quoted.single.quarzum",
+					"begin": "'",
+					"end": "'",
+					"patterns": [
+						{
+							"include": "#escapes"
+						}
+					]
+				}
+			]
+		},
+		"escapes": {
+			"match": "\\\\([abtnvfre]|[0-7]{1,3}|x[0-9a-fA-F]+|.)",
+			"name": "constant.character.escape.quarzum"
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.integer.hex.quarzum",
+					"match": "\\b0[xX][0-9a-fA-F]+\\b"
+				},
+				{
+					"name": "constant.numeric.float.quarzum",
+					"match": "\\b[0-9]+\\.[0-9]+\\b"
+				},
+				{
+					"name": "constant.numeric.integer.decimal.quarzum",
+					"match": "\\b[0-9]+\\b"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.quarzum",
+					"match": "\\b(pass|break|case|continue|default|do|else|exit|for|foreach|if|import|in|match|return|switch|while)\\b"
+				},
+				{
+					"name": "keyword.declaration.quarzum",
+					"match": "\\b(const|function|implements|new|var)\\b"
+				},
+				{
+					"name": "keyword.other.quarzum",
+					"match": "\\b(alloc|as|free|null|sizeof|this|true|false)\\b"
+				},
+				{
+					"name": "keyword.operator.logical.quarzum",
+					"match": "\\b(and|or|xor|not)\\b"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"name": "storage.type.class.quarzum",
+					"match": "\\b(class|struct|enum|trait)\\b"
+				},
+				{
+					"name": "storage.type.primitive.quarzum",
+					"match": "\\b(void|never|bool|char|int|int8|int16|int32|int64|uint|uint8|uint16|uint32|uint64|float|float32|float64|string)\\b"
+				},
+				{
+					"name": "storage.type.quarzum",
+					"match": "\\b(ptr|ref)\\b"
+				},
+				{
+					"name": "keyword.other.access.quarzum",
+					"match": "\\b(public|private|protected)\\b"
+				},
+				{
+					"name": "keyword.other.safety.quarzum",
+					"match": "\\b(pure|mutable|unsafe)\\b"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.comparison.quarzum",
+					"match": "(?<![=!<>])(==|!=|<=|>=|<|>)"
+				},
+				{
+					"name": "keyword.operator.assignment.compound.quarzum",
+					"match": "(\\+=|-=|\\*=|/=|%=|&&=|\\|\\|=|\\^\\^=|!!=)"
+				},
+				{
+					"name": "keyword.operator.assignment.quarzum",
+					"match": "="
+				},
+				{
+					"name": "keyword.operator.bitwise.quarzum",
+					"match": "&&|\\|\\||\\^\\^|!!|&"
+				},
+				{
+					"name": "keyword.operator.arithmetic.quarzum",
+					"match": "\\+|-|\\*|/|%"
+				},
+				{
+					"name": "punctuation.quarzum",
+					"match": "\\?|:|=>|,|;|\\.|@"
+				}
+			]
+		},
+		"identifiers": {
+			"patterns": [
+				{
+					"name": "constant.other.enum.variant.quarzum",
+					"match": "\\b[A-Z][a-zA-Z0-9_]*\\.[A-Z][a-zA-Z0-9_]*\\b"
+				},
+				{
+					"name": "variable.other.property.quarzum",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\.([a-zA-Z_][a-zA-Z0-9_]*)",
+					"captures": {
+						"1": {
+							"name": "variable.other.property.quarzum"
+						}
+					}
+				},
+				{
+					"name": "entity.name.type.quarzum",
+					"match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+				},
+				{
+					"name": "identifier.quarzum",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+				}
+			]
+		}
+	}
+}

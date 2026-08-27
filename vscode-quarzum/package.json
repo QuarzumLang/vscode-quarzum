@@ -1,0 +1,68 @@
+{
+	"name": "vscode-quarzum",
+	"displayName": "Quarzum",
+	"description": "Quarzum language support: syntax highlighting and code snippets",
+	"version": "0.2.0",
+	"publisher": "quarzum",
+	"engines": {
+		"vscode": "^1.75.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Snippets"
+	],
+	"keywords": [
+		"quarzum",
+		"language",
+		"syntax",
+		"snippets"
+	],
+	"license": "MIT",
+	"icon": "images/quarzum_logo.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/QuarzumLang/vscode-quarzum"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "quarzum",
+				"aliases": [
+					"Quarzum",
+					"quarzum"
+				],
+				"extensions": [
+					".qz",
+					".quarzum"
+				],
+				"configuration": "./language-configuration.json",
+				"icon": {
+					"dark": "./icons/quarzum-language.png",
+					"light": "./icons/quarzum-language-light.png"
+				}
+			}
+		],
+		"grammars": [
+			{
+				"language": "quarzum",
+				"scopeName": "source.quarzum",
+				"path": "./syntaxes/quarzum.tmLanguage.json",
+				"balancedBracketScopes": [
+					"*"
+				],
+				"unbalancedBracketScopes": [
+					"string.quoted.double.quarzum",
+					"string.quoted.single.quarzum",
+					"comment.line.double-slash.quarzum",
+					"comment.block.quarzum"
+				]
+			}
+		],
+		"snippets": [
+			{
+				"language": "quarzum",
+				"path": "./snippets/quarzum.json"
+			}
+		]
+	}
+}

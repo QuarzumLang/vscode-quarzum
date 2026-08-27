@@ -1,0 +1,314 @@
+{
+	"import": {
+		"prefix": "import",
+		"body": [
+			"import \"$1\";"
+		],
+		"description": "Import a Quarzum module"
+	},
+	"import std io": {
+		"prefix": "importio",
+		"body": [
+			"import \"@std/io.qz\""
+		],
+		"description": "Import the standard I/O library"
+	},
+	"main": {
+		"prefix": "main",
+		"body": [
+			"function main() {",
+			"\t$0",
+			"}"
+		],
+		"description": "Program entry point"
+	},
+	"function": {
+		"prefix": "function",
+		"body": [
+			"function ${1:name}(${2:params}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Declare a function"
+	},
+	"function typed": {
+		"prefix": "functype",
+		"body": [
+			"function ${1:name}(${2:param}: ${3:type}) : ${4:returnType} {",
+			"\t$0",
+			"}"
+		],
+		"description": "Declare a typed function"
+	},
+	"function expression": {
+		"prefix": "funcexpr",
+		"body": [
+			"function ${1:name}(${2:param}: ${3:type}) : ${4:returnType} => ${5:expression};"
+		],
+		"description": "Declare an expression-bodied function"
+	},
+	"class": {
+		"prefix": "class",
+		"body": [
+			"class ${1:Name} {",
+			"\tvar ${2:field}: ${3:type};",
+			"",
+			"\tfunction new(${4:args}) {",
+			"\t\t$0",
+			"\t}",
+			"}"
+		],
+		"description": "Declare a class"
+	},
+	"class generic": {
+		"prefix": "classgen",
+		"body": [
+			"class ${1:Name}<${2:T}> implements ${3:Collection}<$2> {",
+			"\tvar ${4:data}: ptr<$2>;",
+			"\tvar ${5:size}: uint64;",
+			"",
+			"\tfunction new(${6:capacity: uint64}) {",
+			"\t\tthis.$5 = 0;",
+			"\t\t$0",
+			"\t}",
+			"}"
+		],
+		"description": "Declare a generic class implementing a trait"
+	},
+	"struct": {
+		"prefix": "struct",
+		"body": [
+			"struct ${1:Name} {",
+			"\tvar ${2:field}: ${3:type};",
+			"\t$0",
+			"}"
+		],
+		"description": "Declare a struct"
+	},
+	"enum": {
+		"prefix": "enum",
+		"body": [
+			"enum ${1:Name} {",
+			"\t${2:Variant},",
+			"\t${3:Other}",
+			"}"
+		],
+		"description": "Declare an enum with variants"
+	},
+	"enum generic": {
+		"prefix": "enumgen",
+		"body": [
+			"enum ${1:Optional}<${2:T}> {",
+			"\t${3:Some}($2),",
+			"\t${4:None}",
+			"}"
+		],
+		"description": "Declare a generic enum with parameterized variants"
+	},
+	"trait": {
+		"prefix": "trait",
+		"body": [
+			"trait ${1:Name} {",
+			"\tfunction ${2:method}(${3:param}: ${4:type}) : ${5:returnType};",
+			"\t$0",
+			"}"
+		],
+		"description": "Declare a trait"
+	},
+	"var": {
+		"prefix": "var",
+		"body": [
+			"var ${1:name} = ${2:value};"
+		],
+		"description": "Declare a mutable variable"
+	},
+	"var typed": {
+		"prefix": "vartype",
+		"body": [
+			"var ${1:name}: ${2:type} = ${3:value};"
+		],
+		"description": "Declare a typed variable"
+	},
+	"const": {
+		"prefix": "const",
+		"body": [
+			"const ${1:NAME} = ${2:value};"
+		],
+		"description": "Declare an immutable constant"
+	},
+	"if": {
+		"prefix": "if",
+		"body": [
+			"if(${1:condition}){",
+			"\t$0",
+			"}"
+		],
+		"description": "If statement"
+	},
+	"if else": {
+		"prefix": "ifelse",
+		"body": [
+			"if(${1:condition}){",
+			"\t$2",
+			"}",
+			"else {",
+			"\t$0",
+			"}"
+		],
+		"description": "If-else statement"
+	},
+	"for": {
+		"prefix": "for",
+		"body": [
+			"for(var ${1:i}: ${2:int64} = 0; $1 < ${3:n}; $1 = $1 + 1){",
+			"\t$0",
+			"}"
+		],
+		"description": "Classic for loop"
+	},
+	"foreach": {
+		"prefix": "foreach",
+		"body": [
+			"foreach(${1:item} in ${2:collection}){",
+			"\t$0",
+			"}"
+		],
+		"description": "Iterate over a slice"
+	},
+	"while": {
+		"prefix": "while",
+		"body": [
+			"while(${1:condition}){",
+			"\t$0",
+			"}"
+		],
+		"description": "While loop"
+	},
+	"do while": {
+		"prefix": "do",
+		"body": [
+			"do {",
+			"\t$0",
+			"} while(${1:condition});"
+		],
+		"description": "Do-while loop"
+	},
+	"switch": {
+		"prefix": "switch",
+		"body": [
+			"switch(${1:value}){",
+			"\tcase ${2:pattern}:",
+			"\t\t${3:statements}",
+			"\t\tbreak;",
+			"\tdefault:",
+			"\t\t$0",
+			"}"
+		],
+		"description": "Switch statement"
+	},
+	"case": {
+		"prefix": "case",
+		"body": [
+			"case ${1:pattern}:",
+			"\t$0",
+			"\tbreak;"
+		],
+		"description": "Switch case label"
+	},
+	"match": {
+		"prefix": "match",
+		"body": [
+			"match(${1:value}){",
+			"\tcase ${2:Variant}(${3:args}) => ${4:expression},",
+			"\tcase ${5:Other} => $0",
+			"}"
+		],
+		"description": "Pattern matching over an enum"
+	},
+	"new": {
+		"prefix": "new",
+		"body": [
+			"var ${1:obj} = new ${2:Type}(${3:args});"
+		],
+		"description": "Instantiate a class"
+	},
+	"alloc": {
+		"prefix": "alloc",
+		"body": [
+			"var ${1:p} = alloc ${2:T}[${3:n}];"
+		],
+		"description": "Allocate sizeof(T) * n bytes on the heap, returning a ptr<T>"
+	},
+	"free": {
+		"prefix": "free",
+		"body": [
+			"free ${1:ptr};"
+		],
+		"description": "Deallocate memory"
+	},
+	"sizeof": {
+		"prefix": "sizeof",
+		"body": [
+			"sizeof(${1:T})"
+		],
+		"description": "Size in bytes of a type"
+	},
+	"cast": {
+		"prefix": "as",
+		"body": [
+			"${1:expr} as ${2:type}"
+		],
+		"description": "Explicit type cast"
+	},
+	"ternary": {
+		"prefix": "tern",
+		"body": [
+			"${1:condition} ? ${2:a} : ${3:b}"
+		],
+		"description": "Ternary operator"
+	},
+	"println": {
+		"prefix": "println",
+		"body": [
+			"println(\"$1\");"
+		],
+		"description": "Print a line (requires @std/io.qz)"
+	},
+	"print": {
+		"prefix": "print",
+		"body": [
+			"print(\"$1\");"
+		],
+		"description": "Print without newline (requires @std/io.qz)"
+	},
+	"eprintln": {
+		"prefix": "eprintln",
+		"body": [
+			"eprintln(\"$1\");"
+		],
+		"description": "Print a line to stderr (requires @std/io.qz)"
+	},
+	"exit": {
+		"prefix": "exit",
+		"body": [
+			"exit ${1:0};"
+		],
+		"description": "Exit the program with a code"
+	},
+	"return": {
+		"prefix": "return",
+		"body": [
+			"return ${1:value};"
+		],
+		"description": "Return a value"
+	},
+	"import generic trait": {
+		"prefix": "implements",
+		"body": [
+			"class ${1:Name} implements ${2:Trait}<${3:T}> {",
+			"\t$0",
+			"}"
+		],
+		"description": "Declare a class implementing a trait"
+	}
+}
